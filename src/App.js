@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import { Outlet, Route, Router, Routes } from 'react-router-dom';
 import './App.css';
+import requests from './api/requests';
+import Nav from './components/Nav';
+import styled from 'styled-components';
+import Banner from './components/Banner';
+import Category from './components/Category';
+import Row from './components/Row';
+import LoginPage from './pages/login';
+import MainPage from './pages/main';
+import SearchPage from './pages/search';
+import DetailPage from './pages/detail';
+import Login from './components/Login';
+
+const Layout = () => {
+  return (
+    <div>
+      <Nav />
+      <Outlet />
+    </div>
+  );
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          {/* <Route path="login" element={<Login />} /> */}
+          <Route index element={<LoginPage />}></Route>
+          <Route path="main" element={<MainPage />}></Route>
+          <Route path=":movieId" element={<DetailPage />}></Route>
+          <Route path="search" element={<SearchPage />}></Route>
+        </Route>
+      </Routes>
     </div>
   );
 }
